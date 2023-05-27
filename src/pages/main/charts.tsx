@@ -1,14 +1,12 @@
-import React from "react";
-import { Text, View } from "react-native";
-import { Pressable } from "react-native";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Pressable, Text, View } from "react-native";
 
 import { dataChartsDate } from "../../data/data";
 
 import { globalStyles, radioBtn } from "../../styles/style";
 
-export const Charts = () => {
-  const [userOption, setUserOption] = useState(null);
+export const Charts: React.FC = () => {
+  const [userOption, setUserOption] = useState("");
 
   return (
     <View>
@@ -30,6 +28,7 @@ export const Charts = () => {
           );
         })}
       </View>
+
       <View></View>
     </View>
   );

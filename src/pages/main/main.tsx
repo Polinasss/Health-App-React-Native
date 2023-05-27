@@ -11,7 +11,7 @@ import SvgCharts from "../../assets/SvgCharts";
 
 const Tab = createBottomTabNavigator();
 
-export const Main = () => {
+export const Main: React.FC = () => {
   return (
     <Tab.Navigator initialRouteName={"Home"}>
       <Tab.Screen
