@@ -1,13 +1,8 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Home } from "./home";
-import { Diary } from "./diary";
-import { Charts } from "./charts";
-
-import SvgHome from "../../assets/SvgHome";
-import SvgDiary from "../../assets/SvgDiary";
-import SvgCharts from "../../assets/SvgCharts";
+import { SvgCharts, SvgDiary, SvgHome } from "assets";
+import { Charts, Diary, Home } from ".";
 
 const Tab = createBottomTabNavigator();
 

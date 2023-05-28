@@ -8,12 +8,12 @@ import {
 import React, { useState, useEffect } from "react";
 import { View, Text, Pressable } from "react-native";
 import PagerView from "react-native-pager-view";
+import { calendarStyles } from "styles";
 
-import { calendarStyles } from "../styles/style";
 
 interface PropsOfTitle {
-  changeParentsTitle(title: string): void;
-  changeParentsDateText(day: string): void;
+  changeParentsTitle: (title: string) => void;
+  changeParentsDateText: (day: string) => void;
 }
 
 const calendarDates = eachWeekOfInterval(

@@ -4,11 +4,9 @@ import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { StackNavigationProp } from "@react-navigation/stack";
-
-import { globalStyles } from "../../styles/style";
-
-import { userDataRegistration } from "../../data/data";
-import { AuthStackParamList } from "../../router/navigation";
+import { AuthStackParamList } from "router";
+import { userDataRegistration } from "data";
+import { globalStyles } from "styles";
 
 type userNavigationScreenType = StackNavigationProp<AuthStackParamList, "Main">;
 
@@ -29,8 +27,11 @@ export const UserWeight = () => {
         <Controller
           control={control}
           name="weight"
-          rules={{ required: "Введите вес",  }}
-          render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+          rules={{ required: "Введите вес" }}
+          render={({
+            field: { value, onChange, onBlur },
+            fieldState: { error },
+          }) => (
             <View>
               <TextInput
                 keyboardType="numeric"
@@ -39,9 +40,16 @@ export const UserWeight = () => {
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}
-                style={[globalStyles.input, { borderColor: error ? "orange" : "gray" }]}
+                style={[
+                  globalStyles.input,
+                  { borderColor: error ? "orange" : "gray" },
+                ]}
               ></TextInput>
-              {error && <Text style={globalStyles.errorMessage}>{error.message || "Error"}</Text>}
+              {error && (
+                <Text style={globalStyles.errorMessage}>
+                  {error.message || "Error"}
+                </Text>
+              )}
             </View>
           )}
         />

@@ -1,11 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
-import { UserGender } from "../pages/auth/UserGender";
-import { UserAge } from "../pages/auth/UserAge";
-import { UserWeight } from "../pages/auth/UserWeight";
-import { Main } from "../pages/main/main";
-import { Notifications } from "../pages/main/notifications";
+import { Main, Notifications, UserAge, UserGender, UserWeight } from "pages";
 
 export type AuthStackParamList = {
   UserAge: undefined; //React.ReactNode
@@ -16,7 +11,7 @@ export type AuthStackParamList = {
 
 const Stack = createStackNavigator();
 
-export default function AuthNavigation() {
+export const AuthNavigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -46,4 +41,4 @@ export default function AuthNavigation() {
       />
     </Stack.Navigator>
   );
-}
+};

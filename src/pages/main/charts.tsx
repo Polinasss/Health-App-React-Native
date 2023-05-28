@@ -1,12 +1,10 @@
+import { dataChartsDate } from "data";
 import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
-
-import { dataChartsDate } from "../../data/data";
-
-import { globalStyles, radioBtn } from "../../styles/style";
+import { globalStyles, radioBtn } from "styles";
 
 export const Charts: React.FC = () => {
-  const [userOption, setUserOption] = useState("");
+  const [userOption, setUserOption] = useState<string>("");
 
   return (
     <View>

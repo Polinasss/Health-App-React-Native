@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { Text, View, Pressable, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
-import { globalStyles, radioBtn } from "../../styles/style";
-
-import { userDataRegistration } from "../../data/data";
-import { dataGender } from "../../data/data";
-import { AuthStackParamList } from "../../router/navigation";
+import { AuthStackParamList } from "router";
+import { dataGender, userDataRegistration } from "data";
+import { globalStyles, radioBtn } from "styles";
 
 type userNavigationScreenType = StackNavigationProp<
   AuthStackParamList,
@@ -17,12 +14,12 @@ type userNavigationScreenType = StackNavigationProp<
 
 export const UserGender = () => {
   const navigation = useNavigation<userNavigationScreenType>();
-  
-  const [userOption, setUserOption] = useState("");
+
+  const [userOption, setUserOption] = useState<string>("");
 
   const loadScene = () => {
-      userDataRegistration.push({ gender: `${userOption}` });
-      navigation.navigate("UserAge");
+    userDataRegistration.push({ gender: `${userOption}` });
+    navigation.navigate("UserAge");
   };
 
   const loadHomeScene = () => {
@@ -53,7 +50,14 @@ export const UserGender = () => {
         <Pressable style={globalStyles.button} onPress={loadHomeScene}>
           <Text style={globalStyles.btnText}>Пропустить</Text>
         </Pressable>
-        <Pressable style={[ globalStyles.button, {backgroundColor: userOption == "" ? "gray" : "black"}]} disabled={userOption == "" ? true : false} onPress={loadScene}>
+        <Pressable
+          style={[
+            globalStyles.button,
+            { backgroundColor: userOption == "" ? "gray" : "black" },
+          ]}
+          disabled={userOption == "" ? true : false}
+          onPress={loadScene}
+        >
           <Text style={globalStyles.btnText}>Продолжить</Text>
         </Pressable>
       </View>
