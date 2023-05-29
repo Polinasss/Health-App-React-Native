@@ -9,11 +9,19 @@ import {
   additionalDataTwo,
   additionalDataThree,
 } from "../data/data";
+import { IMeasurement } from "types";
 
-export const Measurements = ({ addMeasurements }) => {
-  const [userAdditionalDataOne, setUserAdditionalDataOne] = useState("");
-  const [userAdditionalDataTwo, setUserAdditionalDataTwo] = useState("");
-  const [userAdditionalDataThree, setUserAdditionalDataThree] = useState("");
+interface IProps {
+  addMeasurements: (data: IMeasurement) => void;
+}
+
+export const Measurements = ({ addMeasurements }: IProps) => {
+  const [userAdditionalDataOne, setUserAdditionalDataOne] =
+    useState<string>("");
+  const [userAdditionalDataTwo, setUserAdditionalDataTwo] =
+    useState<string>("");
+  const [userAdditionalDataThree, setUserAdditionalDataThree] =
+    useState<string>("");
 
   return (
     <View style={measurementsStyles.container}>
@@ -29,7 +37,7 @@ export const Measurements = ({ addMeasurements }) => {
             additionalDataThree: "",
           },
         }}
-        onSubmit={(values, action) => {
+        onSubmit={(values: IMeasurement, action) => {
           addMeasurements(values);
           action.resetForm();
         }}
@@ -38,14 +46,14 @@ export const Measurements = ({ addMeasurements }) => {
           <View>
             <View>
               <View style={measurementsStyles.pressureText}>
-                <Text style={{paddingRight: 15}}>Систолическое</Text>
-                <Text style={{paddingRight: 40}}>Диастолическое</Text>
-                <Text style={{paddingRight: 30}}>Пульс</Text>
+                <Text style={{ paddingRight: 15 }}>Систолическое</Text>
+                <Text style={{ paddingRight: 40 }}>Диастолическое</Text>
+                <Text style={{ paddingRight: 30 }}>Пульс</Text>
               </View>
 
               <View style={measurementsStyles.pressureText}>
                 <TextInput
-                style={measurementsStyles.pressureInputs}
+                  style={measurementsStyles.pressureInputs}
                   keyboardType="numeric"
                   maxLength={3}
                   placeholder="_ _ _"
@@ -53,7 +61,10 @@ export const Measurements = ({ addMeasurements }) => {
                   onChangeText={props.handleChange("pressureS")}
                 />
                 <TextInput
-                style={[measurementsStyles.pressureInputs, {marginHorizontal: 15}]}
+                  style={[
+                    measurementsStyles.pressureInputs,
+                    { marginHorizontal: 15 },
+                  ]}
                   keyboardType="numeric"
                   maxLength={3}
                   placeholder="_ _ _"
@@ -61,7 +72,7 @@ export const Measurements = ({ addMeasurements }) => {
                   onChangeText={props.handleChange("pressureD")}
                 />
                 <TextInput
-                style={measurementsStyles.pressureInputs}
+                  style={measurementsStyles.pressureInputs}
                   keyboardType="numeric"
                   maxLength={3}
                   placeholder="_ _ _"
@@ -71,11 +82,13 @@ export const Measurements = ({ addMeasurements }) => {
               </View>
             </View>
 
-            <View style={{marginVertical: 15}}>
+            <View style={{ marginVertical: 15 }}>
               <Text>Input range</Text>
             </View>
 
-            <Text style={measurementsStyles.additionalData}>Дополнительные данные</Text>
+            <Text style={measurementsStyles.additionalData}>
+              Дополнительные данные
+            </Text>
             <View style={measurementsStyles.radioBtnContainer}>
               {additionalDataOne.map((item) => {
                 return (
@@ -86,7 +99,11 @@ export const Measurements = ({ addMeasurements }) => {
                         : measurementsStyles.unselected
                     }
                     key={item.id}
-                    onPress={() => {setUserAdditionalDataOne(item.value); props.values.additionalData.additionalDataOne = item.value;}}
+                    onPress={() => {
+                      setUserAdditionalDataOne(item.value);
+                      props.values.additionalData.additionalDataOne =
+                        item.value;
+                    }}
                   >
                     <Text>{item.value}</Text>
                   </Pressable>
@@ -103,10 +120,13 @@ export const Measurements = ({ addMeasurements }) => {
                         : measurementsStyles.unselected
                     }
                     key={item.id}
-                    onPress={() => {setUserAdditionalDataTwo(item.value); props.values.additionalData.additionalDataTwo = item.value;}}
+                    onPress={() => {
+                      setUserAdditionalDataTwo(item.value);
+                      props.values.additionalData.additionalDataTwo =
+                        item.value;
+                    }}
                   >
-                    <Text
-                    >{item.value}</Text>
+                    <Text>{item.value}</Text>
                   </Pressable>
                 );
               })}
@@ -121,16 +141,20 @@ export const Measurements = ({ addMeasurements }) => {
                         : measurementsStyles.unselected
                     }
                     key={item.id}
-                    onPress={() => {setUserAdditionalDataThree(item.value); props.values.additionalData.additionalDataThree = item.value;}}
+                    onPress={() => {
+                      setUserAdditionalDataThree(item.value);
+                      props.values.additionalData.additionalDataThree =
+                        item.value;
+                    }}
                   >
                     <Text>{item.value}</Text>
                   </Pressable>
                 );
               })}
             </View>
-              <View style={{position: "absolute", width: "100%", bottom: -120}}>
-              <Button  title="Сохранить" onPress={() => props.handleSubmit()} />
-              </View>
+            <View style={{ position: "absolute", width: "100%", bottom: -120 }}>
+              <Button title="Сохранить" onPress={() => props.handleSubmit()} />
+            </View>
           </View>
         )}
       </Formik>

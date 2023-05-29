@@ -9,32 +9,22 @@ import {
   SafeAreaView,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { IMeasurement } from "types";
+import { Measurements } from "components";
+import { homeInfoStyles } from "styles";
 
-import { homeInfoStyles } from "../styles/style";
-
-import { Measurements } from "./measurements";
 
 export const HomeInfo = () => {
-  const [modalWindow, setModalWindow] = useState(false); // появление/исчезновение модального окна
-  const [measurementsState, setMeasurementsState] = useState([
-    {
-      id: "",
-      pressureS: "",
-      pressureD: "",
-      pulse: "",
-      additionalData: {
-        additionalDataOne: "",
-        additionalDataTwo: "",
-        additionalDataThree: "",
-      },
-    },
-  ]);
+  const [modalWindow, setModalWindow] = useState<boolean>(false); // появление/исчезновение модального окна
+  const [measurementsState, setMeasurementsState] = useState<IMeasurement[]>(
+    []
+  );
 
-  const addMeasurements = (obj: object): void => {
+  const addMeasurements = (obj: IMeasurement) => {
     setModalWindow(false); // закрываем модальное окно
-    setMeasurementsState((list: object) => {
+    setMeasurementsState((list: IMeasurement[]) => {
       // добавляем новую карточку в "Важное"
-      obj.id = Math.random().toString();
+      obj.id = crypto.randomUUID();
       return [obj, ...list];
     });
   };
@@ -62,7 +52,8 @@ export const HomeInfo = () => {
         </Text>
       </View>
       <Text style={homeInfoStyles.userInfoTitles}>Измерения</Text>
-      <FlatList style={{}}
+      <FlatList
+        style={{}}
         data={measurementsState}
         renderItem={({ item }) => (
           <TouchableOpacity>

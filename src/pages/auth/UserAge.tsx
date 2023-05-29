@@ -1,22 +1,27 @@
 import React from "react";
 import { Text, View, Pressable } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { AuthStackParamList } from "router";
+import { userDataRegistration } from "data";
+import { globalStyles } from "styles";
 
-import { globalStyles } from "../../styles/style";
+type userNavigationScreenType = StackNavigationProp<
+  AuthStackParamList,
+  "UserWeight"
+>;
 
-import { userDataRegistration } from "../../data/data";
-import { AuthStackParamList } from "../../router/navigation";
-
-type userNavigationScreenType = StackNavigationProp<AuthStackParamList, "UserWeight">;
+interface IFormValue {
+  age: string;
+}
 
 export const UserAge = () => {
   const navigation = useNavigation<userNavigationScreenType>();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm<IFormValue>();
 
-  const loadScene = (data: object): void => {
+  const loadScene: SubmitHandler<IFormValue> = (data): void => {
     userDataRegistration.push(data);
     navigation.navigate("UserWeight");
   };
@@ -28,7 +33,7 @@ export const UserAge = () => {
         <Controller
           control={control}
           name="age"
-          rules={{ required: "Введите возраст",  }}
+          rules={{ required: "Введите возраст" }}
           render={({
             field: { value, onChange, onBlur },
             fieldState: { error },
@@ -41,9 +46,16 @@ export const UserAge = () => {
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}
-                style={[globalStyles.input, { borderColor: error ? "orange" : "gray" }]}
+                style={[
+                  globalStyles.input,
+                  { borderColor: error ? "orange" : "gray" },
+                ]}
               ></TextInput>
-              {error && <Text style={globalStyles.errorMessage}>{error.message || "Error"}</Text>}
+              {error && (
+                <Text style={globalStyles.errorMessage}>
+                  {error.message || "Error"}
+                </Text>
+              )}
             </View>
           )}
         />
