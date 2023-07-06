@@ -1,8 +1,28 @@
-import { IData } from "../types";
+import { IData, IMeasurement, ISymptomsData } from "../types";
 
-// type AuthKey = "age" | "gender" | "weight";
+export const monthRus: string[] = [
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Ноябрь",
+  "Декабрь",
+];
 
-export const userDataRegistration: any[] = [];
+export const weekDaysRus: string[] = [
+  "Воскресенье",
+  "Понедельник",
+  "Вторник",
+  "Среда",
+  "Четверг",
+  "Пятница",
+  "Суббота",
+];
 
 export const dataGender: { value: string }[] = [
   {
@@ -37,3 +57,19 @@ export const additionalDataThree: IData[] = [
   { id: 2, value: "Стоя" },
   { id: 3, value: "Лёжа" },
 ];
+
+export const startCalendarData: IMeasurement = {
+  additionalDataOne: "",
+  additionalDataThree: "",
+  additionalDataTwo: "",
+  date: "",
+  id: "",
+  pressureD: "",
+  pressureS: "",
+  pulse: "",
+  rangePreasure: "",
+};
+
+export const measurementIndicators = ["Сист-ое", "Диаст-ое", "Пульс"];
+
+export const arrayOfMonthDays: string[] = [];
