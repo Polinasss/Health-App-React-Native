@@ -17,7 +17,7 @@ export let testCalendarData: IMeasurement[] = [];
 export let userDataRegistration: any[] = [];
 export let userSymptomsData: ISymptomsData[] = [];
 
-export const HomeInfo: React.FC<PropsOfTitle> = ({ userDate }) => {
+export const HomeInfo: React.FC<PropsOfTitle> = ({ userDate, sendAllMeasurementsData }) => {
   const navigation = useNavigation<userNavigationScreenType>();
   const [modalWindowMeasurements, setModalWindowMeasurements] = useState<boolean>(false);
   const [modalWindowSymptoms, setModalWindowSymptoms] = useState<boolean>(false);
@@ -72,6 +72,7 @@ export const HomeInfo: React.FC<PropsOfTitle> = ({ userDate }) => {
   async function setAsyncStorageData() {
     try {
       await AsyncStorage.setItem("measure", JSON.stringify(testCalendarData));
+      sendAllMeasurementsData(testCalendarData);
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +91,6 @@ export const HomeInfo: React.FC<PropsOfTitle> = ({ userDate }) => {
       if (measurementsData !== null) {
         testCalendarData = JSON.parse(measurementsData);
         setCalendarData(testCalendarData);
-        console.log(testCalendarData);
       } else {
         console.log("you have no data");
       }
@@ -104,7 +104,6 @@ export const HomeInfo: React.FC<PropsOfTitle> = ({ userDate }) => {
       if (userSymptoms !== null) {
         userSymptomsData = JSON.parse(userSymptoms);
         setSymptomsDataState(userSymptomsData);
-        console.log(userSymptomsData);
       } else {
         console.log("you have no data");
       }
@@ -149,6 +148,7 @@ export const HomeInfo: React.FC<PropsOfTitle> = ({ userDate }) => {
       <TouchableOpacity style={homeInfoStyles.trash} onPress={() => {
         testCalendarData = testCalendarData.filter((el) => el.id !== item.id);
         setCalendarData(testCalendarData);
+        sendAllMeasurementsData(testCalendarData);
       }} activeOpacity={0.5}>
         <Animated.View>
           <Feather

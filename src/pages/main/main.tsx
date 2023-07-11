@@ -1,11 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Charts, Diary, Home } from ".";
+import { Charts, Diary, Home, testCalendarData } from ".";
+import { IMeasurement } from "types";
+import { monthRus, arrayOfAllDays, indicesOfDays } from "data";
+import { getCurrentWeek, currentDate } from "components";
 
 const Tab = createBottomTabNavigator();
 
+export const doublePress = false
+
 export const Main: React.FC = () => {
+  const [data, setData] = useState<IMeasurement[]>(testCalendarData);
+
+  const setUserData = (userData: IMeasurement[]) => {
+    setData(userData);
+    console.log(data);
+  };
+
   return (
     <Tab.Navigator
       initialRouteName={"Home"}
@@ -21,12 +33,13 @@ export const Main: React.FC = () => {
         },
         headerShown: false,
         tabBarActiveTintColor: 'orange',
-        tabBarStyle: {height: 80, paddingBottom: 17, paddingTop: 17}
+        tabBarStyle: {height: 80, paddingBottom: 17, paddingTop: 17},
+        
       })}
     >
-      <Tab.Screen name={"Home"} component={Home}/>
-      <Tab.Screen name={"Diary"} component={Diary} />
-      <Tab.Screen name={"Charts"} component={Charts} />
+      <Tab.Screen name={"Home"}>{() => <Home setUserData={setUserData}/>}</Tab.Screen>
+      <Tab.Screen name={"Diary"}>{() => <Diary allDataDiary={data}/>}</Tab.Screen>
+      <Tab.Screen name={"Charts"}>{() => <Charts/>}</Tab.Screen>
     </Tab.Navigator>
   );
 };

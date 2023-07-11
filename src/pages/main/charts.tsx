@@ -4,33 +4,19 @@ import { Pressable, Text, View, Dimensions, SafeAreaView, TouchableOpacity } fro
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import { BarChart } from "react-native-chart-kit";
 import { homeInfoStyles, measurementsStyles, chartsStyles } from "styles";
-import { measurementIndicators, arrayOfMonthDays } from "data";
-import { calendarDates, currentDate } from "components";
+import { measurementIndicators, arrayOfAllDays } from "data";
+import { currentDate } from "components";
 import { testCalendarData } from ".";
-
-calendarDates.map((week) => {
-  {
-    week.map((day) => {
-      const yearToday =
-        monthRus[day.getMonth()] +
-        " " +
-        day.getDate() +
-        ", " +
-        day.getFullYear();
-      arrayOfMonthDays.push(yearToday);
-    });
-  }
-});
 
 export const Charts: React.FC = () => {
   const [userOption, setUserOption] = useState<string>("день");
   const [numberOfElement, setNumberOfElement] = useState<number>(
-    arrayOfMonthDays.indexOf(currentDate, 0)
+    arrayOfAllDays.indexOf(currentDate, 0)
   );
 
-  const preasureS = testCalendarData.find((el) => el.date === arrayOfMonthDays[numberOfElement])?.pressureS;
-  const preasureD = testCalendarData.find((el) => el.date === arrayOfMonthDays[numberOfElement])?.pressureD;
-  const pulse = testCalendarData.find((el) => el.date === arrayOfMonthDays[numberOfElement])?.pulse;
+  const preasureS = testCalendarData.find((el) => el.date === arrayOfAllDays[numberOfElement])?.pressureS;
+  const preasureD = testCalendarData.find((el) => el.date === arrayOfAllDays[numberOfElement])?.pressureD;
+  const pulse = testCalendarData.find((el) => el.date === arrayOfAllDays[numberOfElement])?.pulse;
   const resultDataOfTheDay = [Number(preasureS), Number(preasureD), Number(pulse)]
 
   const data = {
@@ -83,7 +69,7 @@ export const Charts: React.FC = () => {
           <AntDesign name="caretleft" size={24} color="black" />
         </TouchableOpacity>
         <View>
-          <Text>{arrayOfMonthDays[numberOfElement]}</Text>
+          <Text>{arrayOfAllDays[numberOfElement]}</Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.3}

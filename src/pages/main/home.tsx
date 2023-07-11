@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CalendarSlider, currentDate } from "components";
-import { HomeInfo } from ".";
+import { HomeInfo, testCalendarData } from ".";
 import { globalStyles, homeInfoStyles } from "styles";
+import { IMeasurement } from "types";
 
-export const Home: React.FC = () => {
+interface IHome {
+  setUserData: (data: IMeasurement[]) => void;
+}
+
+export const Home: React.FC<IHome> = ({setUserData: userData}) => {
   const [mainTitle, setMainTitle] = useState<string>("Сегодня");
   const [mainDateText, setMainDateText] = useState<string>(currentDate);
+  const [data, setData] = useState<IMeasurement[]>(testCalendarData)
 
   const setTitle = (mainTitle: string) => {
     setMainTitle(mainTitle);
@@ -15,6 +21,10 @@ export const Home: React.FC = () => {
   const setTodayDate = (mainDateText: string) => {
     setMainDateText(mainDateText);
   };
+  const setMeasurementsData = (measurementsData: IMeasurement[]) => {
+    setData(measurementsData);
+    userData(data);
+  }
 
   return (
     <SafeAreaView style={globalStyles.safeAreaContainer}>
@@ -24,7 +34,7 @@ export const Home: React.FC = () => {
         changeParentsTitle={setTitle}
         changeParentsDateText={setTodayDate}
       />
-      <HomeInfo userDate={mainDateText} />
+      <HomeInfo sendAllMeasurementsData={setMeasurementsData} userDate={mainDateText} />
     </SafeAreaView>
   );
 };

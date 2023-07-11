@@ -72,4 +72,6 @@ export const startCalendarData: IMeasurement = {
 
 export const measurementIndicators = ["Сист-ое", "Диаст-ое", "Пульс"];
 
-export const arrayOfMonthDays: string[] = [];
+export const arrayOfAllDays: string[] = [];
+export const indicesOfDays: number[] = []; // [1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0]
+
