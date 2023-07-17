@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { CalendarSlider, currentDate } from "components";
 import { HomeInfo, testCalendarData } from ".";
 import { globalStyles, homeInfoStyles } from "styles";
 import { IMeasurement } from "types";
+import { doublePress } from ".";
 
 interface IHome {
   setUserData: (data: IMeasurement[]) => void;
 }
 
-export const Home: React.FC<IHome> = ({setUserData: userData}) => {
+export const Home: React.FC<IHome> = ({setUserData: userData }) => {
   const [mainTitle, setMainTitle] = useState<string>("Сегодня");
   const [mainDateText, setMainDateText] = useState<string>(currentDate);
-  const [data, setData] = useState<IMeasurement[]>(testCalendarData)
+  const [data, setData] = useState<IMeasurement[]>(testCalendarData);
 
   const setTitle = (mainTitle: string) => {
-    setMainTitle(mainTitle);
+      setMainTitle(mainTitle);
   };
   const setTodayDate = (mainDateText: string) => {
     setMainDateText(mainDateText);
